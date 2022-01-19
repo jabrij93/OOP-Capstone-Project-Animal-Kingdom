@@ -1,0 +1,70 @@
+import java.awt.*;
+
+public class Giant extends Critter {
+    private int giantMove;
+
+    public Giant() {
+        giantMove=1;
+    }
+
+    public Color getColor() {
+        return Color.GRAY;
+    }
+
+    public String toString() {
+        if (giantMove <= 6) {
+            return "fee";
+        } else if (giantMove <= 12) {
+            return "fie";
+        } else if (giantMove <= 18) {
+            return "foe";
+        } else {
+            return "fum";
+        }
+    }
+
+    public Action getMove(CritterInfo info) {
+            if (info.getFront() == Neighbor.OTHER) {
+                trackMoves();
+                return Action.INFECT;
+            } else if (info.getFront() == Neighbor.EMPTY) {
+                trackMoves();
+                return Action.HOP;
+            } else {
+                trackMoves();
+                return Action.RIGHT;
+            }
+    }
+
+    public void trackMoves() {
+        if (giantMove == 24) {
+            giantMove=1;
+        } else {
+            giantMove++;
+        }
+    }
+}
+
+//        String initialString = "fee fie foe fum";
+//        String splittedStrings[] = initialString.split(" ");
+//        for (int i = 0; i < splittedStrings.length; i++) {
+//            String word = splittedStrings[i];
+//            for (int j = 0; j < 6; j++) {
+//                System.out.print(word);
+//            }
+//            System.out.println();
+//        }
+//    }
+
+//    public String toString() {
+//        String initialString = "6 fee 6 fie 6 foe 6 fum";
+//        String splittedStrings[] = initialString.split(" ");
+//        for (int i=0; i<splittedStrings.length; i+=2) {
+//            int times = Integer.parseInt(splittedStrings[i]);
+//            String number = splittedStrings[i+1];
+//            for (int j = 0; j < times; j++) {
+//                System.out.print(number);
+//            }
+//            System.out.println();
+//        }
+//    }
