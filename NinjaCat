@@ -1,0 +1,39 @@
+import java.awt.*;
+
+// NinjaCat properties is more or less likely like that of a white tiger(getColor and toString) while how it moves is like the giant
+public class NinjaCat extends Critter {
+    private boolean hasInfected;
+
+    public NinjaCat() {
+        hasInfected = false;
+    }
+
+    public Color getColor() {
+        if (hasInfected) {
+            return Color.MAGENTA;
+        } else {
+            return Color.PINK;
+        }
+    }
+
+    public String toString() {
+        if (hasInfected) {
+            return "Z";
+        } else {
+            return "z";
+        }
+    }
+
+    public Action getMove(CritterInfo info) {
+        if (info.getFront() == Neighbor.OTHER) {
+            hasInfected = true;
+            return Action.INFECT;
+        } else if (info.getFront() == Neighbor.WALL || info.getRight() == Neighbor.WALL) {
+            return Action.LEFT;
+        } else if (info.getFront() == Neighbor.SAME) {
+            return Action.RIGHT;
+        } else {
+            return Action.HOP;
+        }
+    }
+}
